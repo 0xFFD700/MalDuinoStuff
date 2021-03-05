@@ -1,0 +1,9 @@
+#!/bin/bash
+wallpaperdir="$HOME/wallpaper"
+
+files=($wallpaperdir/*)
+randompic=`printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
+
+echo -e "# xfce backdrop list\n$randompic">$HOME/.config/xfce4/desktop/backdrop.list
+xfdesktop --reloady
+
